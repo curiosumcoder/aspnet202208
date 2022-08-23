@@ -1,5 +1,5 @@
 # ASP.NET Core MVC
-Material relacionado con el curso de ASP.NET Core MVC impartido en UCenfotec (modalidad virtual) en Setiembre 2021.
+Material relacionado con el curso de ASP.NET Core MVC impartido en UCenfotec (modalidad virtual) en Agosto 2022.
 
 ### Requerimientos de software
 1.	Requisitos mínimos del hardware que ocupamos. 
