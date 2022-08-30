@@ -7,6 +7,7 @@
 * dotnet ef dbcontext scaffold "Data Source=.\sqlexpress;Database=Northwind;Integrated Security=SSPI;" Microsoft.EntityFrameworkCore.SqlServer  -c NWContext
 * dotnet ef dbcontext scaffold "Data Source=.\sqlexpress;Database=Northwind;Integrated Security=SSPI;" Microsoft.EntityFrameworkCore.SqlServer  -c NWContext -f -o Data
 * dotnet ef dbcontext scaffold "Data Source=.\sqlexpress;Database=Northwind;Integrated Security=SSPI;" Microsoft.EntityFrameworkCore.SqlServer --schema Profile -c NWContext -f -o Models\Data
+* dotnet ef dbcontext scaffold "Data Source=.\sqlexpress;Database=Northwind;Integrated Security=SSPI;" Microsoft.EntityFrameworkCore.SqlServer -c NWContext -f -o ..\Northwind.Store.Model\ --context-dir ..\Northwind.Store.Data\ -n Northwind.Store.Model --context-namespace Northwind.Store.Data
 
 
 * https://docs.microsoft.com/en-us/ef/core/extensions/

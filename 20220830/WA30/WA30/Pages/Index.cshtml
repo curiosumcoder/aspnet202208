@@ -1,0 +1,29 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Razor Pages</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<form method="get">
+    <input asp-for="Filter" placeholder="Type filter ..." class="form-control" />
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+@if (Model.Products.Count > 0)
+{
+    <table class="table table-striped">
+        @foreach (var p in Model.Products)
+        {
+            <tr>
+                <td>@p.ProductId</td>
+                <td>@p.ProductName</td>
+                <td>@p.UnitPrice</td>
+            </tr>
+        }
+    </table>
+}
