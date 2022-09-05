@@ -499,7 +499,7 @@ namespace CA40
             // Lazy Loading
             using (NWContext db = new NWContext())
             {
-                db.ChangeTracker.LazyLoadingEnabled = false;
+                //db.ChangeTracker.LazyLoadingEnabled = false;
                 //bool isLazy = true;
                 //db.ChangeTracker.LazyLoadingEnabled = isLazy; // default = true
 
