@@ -1,0 +1,239 @@
+Laboratorio #1
+
+Objetivo: Construir la estructura básica de una capa de acceso a datos utilizando
+Entity Framework Core.
+
+1. Crear una aplicación de consola utilizando .NET 6. El nombre que se debe asignar
+   a la aplicación Northwind.Store.UI.Shell y la solución es NorthwindStore.
+   
+2. Agregar a la solución un nuevo proyecto de tipo Class Library utilizando .NET 6.
+   
+   El nombre del Class Library debe ser Northwind.Store.Model. Se debe eliminar el archivo
+   Class1.cs que incluye como parte de la generación del proyecto.
+   
+3. Agregar a la solución un nuevo proyecto de tipo Class Library utilizando .NET 6.
+   
+   El nombre del Class Library debe ser Northwind.Store.Data. Se debe eliminar el archivo
+   Class1.cs que incluye como parte de la generación del proyecto.
+
+4. Se procederá con la generación del modelo de la base de datos existente Northwind.
+
+   Agregar los siguientes paquetes por medio de Nuget al proyecto de aplicación 
+   de consola Northwind.Store.UI.Shell.
+   
+	Microsoft.EntityFrameworkCore.Design
+	Microsoft.EntityFrameworkCore.SqlServer
+	
+   También puede agregar la referencias por medio de la línea de comandos:
+   
+   dotnet add package Microsoft.EntityFrameworkCore.Design
+   dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+	
+5. Verifique la instalación del comando de dotnet ef. Para hacerlo puede ejecutar de la 
+   línea de comandos: dotnet ef
+
+						 _/\__
+				   ---==/    \\
+			 ___  ___   |.    \|\
+			| __|| __|  |  )   \\\
+			| _| | _|   \_/ |  //|\\
+			|___||_|       /   \\\/\\
+
+	Entity Framework Core .NET Command-line Tools 6.0.8
+
+	Usage: dotnet ef [options] [command]
+
+	Options:
+	  --version        Show version information
+	  -h|--help        Show help information
+	  -v|--verbose     Show verbose output.
+	  --no-color       Don't colorize output.
+	  --prefix-output  Prefix output with level.
+
+	Commands:
+	  database    Commands to manage the database.
+	  dbcontext   Commands to manage DbContext types.
+	  migrations  Commands to manage migrations.
+
+	Use "dotnet ef [command] --help" for more information about a command.
+
+	--------------------------------------------------------------------------
+   
+   Si el comando no se encuentra instalado se debe instalar ejecutando desde
+   la línea de comandos: dotnet tool install --global dotnet-ef
+
+6. Haciendo uso del comando ef se procederá con la generación del modelo del Entity Framework
+   para la base de datos Northwind. Se personalizará el destino de la salida del proceso
+   de "Scaffolding" y el nombre de la clase de contexto.
+   
+   El detalle de las diferentes opciones de línea de comando disponibles se puede
+   encontrar en el enlace: https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet#dotnet-ef-dbcontext
+   
+   Proceda ejecutando la siguiente línea, desde la línea de comandos ubicandose en dentro de la carpeta del código fuente de la
+   aplicación de consola Northwind.Store.UI.Shell. Verifique en caso de que sea necesario si la hilera de conexión necesita ser modificada.
+
+   -- Para incluir el namespace pata el DbContext y los Modelos
+   dotnet ef dbcontext scaffold "Data Source=.\sqlexpress;Database=Northwind;Integrated Security=SSPI;" Microsoft.EntityFrameworkCore.SqlServer -c NWContext -f -o ..\Northwind.Store.Model\ --context-dir ..\Northwind.Store.Data\ -n Northwind.Store.Model --context-namespace Northwind.Store.Data
+
+   Otros Ejemplos:
+   
+	   -- Para todo la base de datos
+	   dotnet ef dbcontext scaffold "Data Source=.\sqlexpress;Database=Northwind;Integrated Security=SSPI;" Microsoft.EntityFrameworkCore.SqlServer -d -c NWContext -f -o ..\Northwind.Store.Model
+	   -- Para una esquema específico
+	   dotnet ef dbcontext scaffold "Data Source=.\sqlexpress;Database=Northwind;Integrated Security=SSPI;" Microsoft.EntityFrameworkCore.SqlServer --schema dbo -c NWContext -f -o ..\Northwind.Store.Model
+
+	   Las opciones detalladas del comando ef se pueden encontrar en https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet
+	   También puede obtener ayuda por medio del comando: dotnet ef dbcontext scaffold -h
+   
+   Verifique que el namespace de las clases recientemente generadas y colocadas en el proyecto Northwind.Store.Model, 
+   corresponde a Northwind.Store.Model, y las clases colocadas en Northwind.Store.Data tienen el namespace
+   Northwind.Store.Data.
+   
+   En las propiedades del proyecto Northwind.Store.Model cambie el Target Framework por: .NET 6, en caso de ser necesario.
+
+7. A efectos de la clase de contexto, verifique que la clase NWContext.cs pertenece al proyecto 
+   Northwind.Store.Data. En el encabezado de esta clase no se reconoce el namespace Microsoft.EntityFrameworkCore y 
+   Microsoft.EntityFrameworkCore.Metadata.
+   
+   En las propiedades del proyecto Northwind.Store.Data cambie el Target Framework por: .NET 6, en caso de ser necesario.
+   
+   Utilizando la asistencia que ofrece Visual Studio incluya los paquetes requeridos para que dichos
+   namespace sean reconocidos.
+   
+   Específicamente el paquete requerido es: Microsoft.EntityFrameworkCore.SqlServer. También se puede agregar por 
+   medio de la línea de comandos como: dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+   
+   Verifique que el namespace de la clase NWContext sea Northwind.Store.Data.
+
+   Agregue una referencia del proyecto Northwind.Store.Data al proyecto Northwind.Store.Model. Incorpore a las sentencias using del
+   archivo NWContext.cs la línea: using Northwind.Store.Model;
+   
+   Verifique la compilación satisfactoria de todos los proyectos incluidos en la solución.
+   
+8. Se debe comprobar que el código de acceso a datos funciona. Agregar en la aplicación de consola Northwind.Store.UI.Shell
+   referencias a los Class Library Northwind.Store.Model y Northwind.Store.Data.
+   
+   Modifique el método Main de la clase Program de forma que haciendo uso de la clase NWContext se pueda mostrar
+   en la consola un listado de todos los Customers, mostrando y obteniendo ÚNICAMENTE desde la base de datos 
+   los datos de: CompanyName, ContactName y Country, ordenado por CompanyName.
+   
+9. Actualmente la hilera de conexión es parte del constructor de la clase NWContext. Se debe modificar este comportamiento
+    para que este valor se obtenga desde un archivo de configuración.
+	
+	Agregar al proyecto Northwind.Store.UI.Shell un archivo en formato json con el nombre appsettings.json, el contenido
+    de este archivo debe ser como se presenta a continuación. Considerar los necesarios a efectos de la instancia de
+	base de datos que se está utilizando.
+	
+	{
+	  "ConnectionStrings": {
+		"NW": "Data Source=.\\sqlexpress;Database=Northwind;Integrated Security=SSPI;MultipleActiveResultSets=True;"
+	  }
+	}
+	
+	Una vez creado el archivo modifique las propiedades del archivo otorgadas por Visual Studio, de forma
+	que Build Action sea Content, y Copy to Output Directory sea Copy if newer.
+	
+10. Dado que la lectura de la configuración para el acceso a datos se da en el archivo NWContext en el
+    Class Library Nortwind.Store.Data es necesario efectuar algunos cambios para soportar la lectura del archivo de 
+	configuración appsettings.json.
+	
+	Se debe agregar los paquetes:
+	
+	Microsoft.Extensions.Configuration
+	Microsoft.Extensions.Configuration.FileExtensions
+	Microsoft.Extensions.Configuration.Json
+	
+	Se debe modificar el código del método OnConfiguring(DbContextOptionsBuilder optionsBuilder), para 
+	leer desde el archivo de configuración la hilera de conexión.
+	
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+		    if (!optionsBuilder.IsConfigured)
+            {
+				var builder = new ConfigurationBuilder()
+					.SetBasePath(Directory.GetCurrentDirectory())
+					.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+				IConfigurationRoot configuration = builder.Build();
+				optionsBuilder.UseSqlServer(configuration.GetConnectionString("NW"));
+			}
+        }
+	
+	Puede ser necesario agregar los using:
+	
+	using Microsoft.Extensions.Configuration;
+	using System.IO;
+	
+	Para comprobar que la modificación fué satisfactoria se debe volver a ejecutar la aplicación Northwind.Store.UI.Shell
+	obteniendo los mismos resultados, solamente que ahora los valores de conexión pueden ser proporcionados
+	por medio de un archivo de configuración. 
+	
+11. Habilitar el soporte para Lazy Loading, incorporando el paquete Microsoft.EntityFrameworkCore.Proxies
+	
+	    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            // Microsoft.EntityFrameworkCore.Proxies
+            optionsBuilder.UseLazyLoadingProxies();
+
+		    if (!optionsBuilder.IsConfigured)
+            {
+				var builder = new ConfigurationBuilder()
+					.SetBasePath(Directory.GetCurrentDirectory())
+					.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+				IConfigurationRoot configuration = builder.Build();
+				optionsBuilder.UseSqlServer(configuration.GetConnectionString("NW"));
+			}
+        } 	
+	
+12. Confirme que los nombres de las clases que representan los modelos (entidades) tienen su nombre el singular,
+    y si fuera necesario cambie de plural a singular el nombre de clase.
+   
+    ¡¡¡¡ HACER SOLAMENTE SI LA CLASES ESTÁN EN PLURAL !!!! - INICIO	   
+   	Modifique el nombre de las clases y sus archivos recientemente generados correspondientes a las entidades/modelos
+    creados en el proceso de Scaffolding y colocadas en el proyecto Northwind.Store.Model, de forma que la redacción 
+	del nombre de cada clase sea en singular, por ejemplo: Customers debe pasar a llamarse Customer. Los DbSet en la 
+	clase NWContext deben permanecer en plural.
+   
+    Lo anterior modificará el nombre de la clase Northwind.Store.Model.Customers por Northwind.Store.Model.Customer, 
+	la idea es pasarlo al singular. Esta cambio afectará al DbSet<Customers> en la clase Northwind.Store.Data.NWContext,
+    cambie el tipo del DbSet por DbSet<Customer>, la idea es poder usar en singular el nombre de las instancias
+    del objecto Customer, y el nombre de las colecciones en plural.
+    ¡¡¡¡ HACER SOLAMENTE SI LA CLASES ESTÁN EN PLURAL !!!! - FIN
+	
+	Una vez aplicados los cambios sobre los diferentes proyectos se debe comprobar que la aplicación de
+	consola Northwind.Store.UI.Shell continua funcionando de la misma manera.
+	
+13. Cambie la presentación del listado para que su presentación se lo más cercana al siguiente ejemplo. Los
+    datos de CompanyName, ContactName y Country, deben estar debidamente alineados en su propia columna.
+	
+	Alfreds Futterkiste                     Maria Anders            Germany
+	Ana Trujillo Emparedados y helados      Ana Trujillo            Mexico
+	Antonio Moreno Taquería                 Antonio Moreno          Mexico
+	Around the Horn                         Thomas Hardy            UK
+	Berglunds snabbköp                      Christina Berglund      Sweden
+	Blauer See Delikatessen                 Hanna Moos              Germany
+	Blondesddsl père et fils                Frédérique Citeaux      France
+	Bólido Comidas preparadas               Martín Sommer           Spain
+	Bon app'                                Laurence Lebihan        France
+	Bottom-Dollar Markets                   Elizabeth Lincoln       Canada
+	B's Beverages                           Victoria Ashworth       UK
+	Cactus Comidas para llevar              Patricio Simpson        Argentina
+	Centro comercial Moctezuma              Francisco Chang         Mexico
+	Chop-suey Chinese                       Yang Wang               Switzerland
+	Comércio Mineiro                        Pedro Afonso            Brazil
+	Consolidated Holdings                   Elizabeth Brown         UK
+	Die Wandernde Kuh                       Rita Müller             Germany
+	Drachenblut Delikatessen                Sven Ottlieb            Germany
+	Du monde entier                         Janine Labrune          France
+	Eastern Connection                      Ann Devon               UK
+	Ernst Handel                            Roland Mendel           Austria
+	...
+
+14. Crear una aplicación de ASP.NET 6 usando Razor Pages, con el nombre Northwind.Store.UI.Demo1.
+	
+	Modificar la página Index para mostrar el mismo listado que resulta del punto #13, pero
+	haciendo uso del código de acceso a datos encapsulado en los assemblies: Northwind.Store.Data y
+	Northwind.Store.Model.
+
+--- ÚLTIMA LÍNEA ---
