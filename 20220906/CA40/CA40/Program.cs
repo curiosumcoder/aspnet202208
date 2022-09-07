@@ -170,7 +170,7 @@ namespace CA40
                 db.SaveChanges();
 
                 //db.Remove(np);
-                //db.Products.Remove(np);
+                db.Products.Remove(np);
                 db.SaveChanges();
 
                 foreach (var p in db.Products.Include(p => p.Category))
