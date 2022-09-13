@@ -430,7 +430,7 @@ namespace CA40
             {
                 var q10 = db.Customers.OrderBy(c => c.CustomerId).Take(5);
                 var q100 = db.Customers.OrderBy(c => c.CustomerId).Skip(5);
-                var q101 = db.Customers.OrderBy(c => c.CustomerId).Skip(5).Take(5);
+                var q101 = db.Customers.OrderBy(c => c.CustomerId).Skip(5).Take(2);
 
                 var q11 = db.Customers.
                     OrderBy(c => c.CustomerId).
@@ -511,7 +511,7 @@ namespace CA40
                 {
                     Console.WriteLine($"{c.CustomerId}, {c.ContactName}");
 
-                    //if (!isLazy)
+                    //if (!db.ChangeTracker.LazyLoadingEnabled)
                     //{
                     //    db.Entry(c).Collection(o => o.Orders).Load();
                     //}
@@ -648,7 +648,7 @@ namespace CA40
             Console.WriteLine("Experimento PLINQ en proceso ...");
 
             // Parallel LINQ
-            var nums = Enumerable.Range(1, 10000);
+            var nums = Enumerable.Range(1, 1000000);
 
             var query = from n in nums.AsParallel()
                         where ToDo(n) == n
@@ -679,7 +679,10 @@ namespace CA40
                 var tran = db.Database.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
                 try
                 {
+                    //var c = db.Customers.First();
+                    //c.ContactName += " ACTUALIZADO";
                     db.SaveChanges();
+
                     // Acciones
                     tran.Commit();
                 }
@@ -698,6 +701,9 @@ namespace CA40
                 using (var db = new NWContext())
                 {
                     // CRUD actions
+
+                    var c = db.Customers.First();
+                    c.ContactName += " ACTUALIZADO";
                     db.SaveChanges();
                 }
 
@@ -811,6 +817,6 @@ namespace CA40
 
     public class MiGrupo : List<Product>
     {
-        public Tuple<int, string> Llave { get; set; }
+        public Tuple<int, string> Key { get; set; }
     }
 }
