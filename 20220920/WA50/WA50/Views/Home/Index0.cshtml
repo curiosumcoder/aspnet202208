@@ -1,0 +1,16 @@
+﻿@{
+    //Layout = null;
+    ViewData["Title"] = "Home Page";
+}
+
+@{
+    var filter = (string)ViewData["filter"];
+    var filter2 = ViewBag.filter2;    
+}
+
+<p>Filter: <strong>@(filter2 ?? "")</strong></p>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to ASP.NET Core MVC</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>

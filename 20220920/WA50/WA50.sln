@@ -5,6 +5,10 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WA50", "WA50\WA50.csproj", "{77DFD0AB-3A5A-4BA3-B998-A1D171D290F6}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.Store.Model", "Northwind.Store.Model\Northwind.Store.Model.csproj", "{F92A7930-A2A6-4972-B98F-3EBCF6FEF9C2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.Store.Data", "Northwind.Store.Data\Northwind.Store.Data.csproj", "{92A03E43-7AD3-4533-A537-7C133BA6AE7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{77DFD0AB-3A5A-4BA3-B998-A1D171D290F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77DFD0AB-3A5A-4BA3-B998-A1D171D290F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77DFD0AB-3A5A-4BA3-B998-A1D171D290F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F92A7930-A2A6-4972-B98F-3EBCF6FEF9C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F92A7930-A2A6-4972-B98F-3EBCF6FEF9C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F92A7930-A2A6-4972-B98F-3EBCF6FEF9C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F92A7930-A2A6-4972-B98F-3EBCF6FEF9C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92A03E43-7AD3-4533-A537-7C133BA6AE7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92A03E43-7AD3-4533-A537-7C133BA6AE7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92A03E43-7AD3-4533-A537-7C133BA6AE7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92A03E43-7AD3-4533-A537-7C133BA6AE7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
