@@ -1,0 +1,104 @@
+﻿@model WA50.Models.HomeIndexModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form class="form" asp-action="Index">
+    <input asp-for="Filter"
+           placeholder="type here ..." />
+</form>
+
+@if (Model.Items != null && Model.Items.Count > 0)
+{
+    <h1>Products</h1>
+    @*    <ul>
+        @foreach (var p in Model.Items)
+        {
+            <li>@p.ProductName</li>
+        }
+    </ul>*@
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items[0].ProductId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items[0].ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items[0].SupplierId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items[0].CategoryId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items[0].QuantityPerUnit)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items[0].UnitPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items[0].UnitsInStock)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items[0].UnitsOnOrder)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items[0].ReorderLevel)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items[0].Discontinued)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.ProductId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.SupplierId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.CategoryId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.QuantityPerUnit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.UnitPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.UnitsInStock)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.UnitsOnOrder)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.ReorderLevel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.Discontinued)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+else
+{
+    <p>No data</p>
+}
+
+@*<form action="/Home/Index" method="post">
+    <input type="search" name="filter"
+        placeholder="type here ..." />
+</form>*@
