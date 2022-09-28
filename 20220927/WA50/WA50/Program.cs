@@ -2,10 +2,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-//builder.Services.AddWebOptimizer(pipeline =>
-//{
-//    pipeline.AddJavaScriptBundle("/js/site.min.js", "/js/site.js");
-//});
+builder.Services.AddWebOptimizer(pipeline =>
+{
+    //pipeline.AddJavaScriptBundle("/js/site.min.js", "/js/site.js");
+});
 
 var app = builder.Build();
 
@@ -19,7 +19,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//app.UseWebOptimizer();
+app.UseWebOptimizer();
 app.UseStaticFiles();
 
 app.UseRouting();
