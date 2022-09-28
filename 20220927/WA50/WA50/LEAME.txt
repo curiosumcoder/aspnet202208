@@ -1,0 +1,15 @@
+﻿https://marketplace.visualstudio.com/items?itemName=Failwyn.BundlerMinifier64
+
+https://github.com/rwasef1830/BundlerMinifier
+dotnet tool install BundlerMinifier.Core.Tool
+dotnet tool list --global
+bundle
+
+Otros
+https://github.com/madskristensen/BundlerMinifier
+https://github.com/madskristensen/BundlerMinifier/wiki
+
+https://www.nuget.org/packages/BundlerMinifier.Core.Tool/4.5.16
+dotnet tool install --global BundlerMinifier.Core.Tool 
+
+https://github.com/madskristensen/BundlerMinifier/wiki/Unbundling-scripts-for-debugging
