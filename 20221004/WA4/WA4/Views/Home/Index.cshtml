@@ -1,0 +1,131 @@
+﻿@model WA4.ViewModels.HomeIndexViewModel
+
+@using WA4.Helpers.HTML
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@{
+    // Templated Razor Delegates
+    // https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-3.1#templated-razor-delegates
+    Func<dynamic, object> productTemplate = @<tr>
+        <td>@item.ProductName</td>
+        <td>@item.QuantityPerUnit</td>
+        <td>@item.UnitPrice</td>
+        <td>@item.UnitsInStock</td>
+        <td>
+            <a asp-controller="Product" asp-action="Detail"
+               asp-route-id="@item.ProductId">
+                Detail
+            </a>
+        </td>
+    </tr>;
+}
+
+@{
+    async Task productTemplate2(Northwind.Store.Model.Product p)
+    {
+            <tr>
+                <td>@p.ProductName</td>
+                <td>@p.QuantityPerUnit</td>
+                <td>@p.UnitPrice</td>
+                <td>@p.UnitsInStock</td>
+                <td>
+                    <a asp-controller="Product" asp-action="Detail"
+                   asp-route-id="@p.ProductId">
+                        Detail
+                    </a>
+                </td>
+            </tr>
+    }
+}
+
+    <form asp-action="Index">
+        <div class="mb-3">
+            <input asp-for="Filter" class="form-control" placeholder="Search filter ...">
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <div class="row">
+        <div class="col-12">
+            <h2>Products</h2>
+
+        @foreach (var g in Model.Groups)
+        {
+                <section>
+                    <h3>@g.CategoryName</h3>
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>QuantityPerUnit</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var p in g.Products)
+                        {
+                                <tr>
+                                    <td>@p.ProductName</td>
+                                    <td>@p.QuantityPerUnit</td>
+                                    <td>@p.UnitPrice</td>
+                                    <td>@p.UnitsInStock</td>
+                                </tr>
+
+                    //Html Helpers
+                            @*                            @ProductHelper.ProductDetail(p)
+                    @ProductHelper.ProductDetail2(p)
+                    @Html.ProductDetail(p)*@
+
+
+                    // Tag Helpers (Components)
+                            @*                            <product data="p" />
+                    <tr product="p"></tr>*@
+
+                    // View Components
+                            @* @await Component.InvokeAsync("Product", new { id = p.ProductId })*@
+                            @*<vc:product id="p.ProductId" />*@
+
+                    // Partial Views
+                            @*                            <partial name="ProductPartial" model="p" />
+                    await Html.RenderPartialAsync("ProductPartial", p);
+                    @await Html.PartialAsync("ProductPartial", p)*@
+
+                    // Templated Razor Delegates
+                            @*@productTemplate(p)*@
+                            @*await productTemplate2(p);*@
+                            @*                            @productLine(p,
+                    @<tr><td style="color: red">@p.ProductName</td>
+                    <td>@p.QuantityPerUnit</td><td>@p.UnitPrice</td></tr>);*@
+
+                            @*<component type="typeof(WA4.UI.Basic.ProductDetail)" render-mode="ServerPrerendered" />*@
+                        }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">
+                                    Items<span class="badge"> @g.Products.Count</span>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </section>
+        }
+        </div>
+    </div>
+
+@using Microsoft.AspNetCore.Html
+@functions {
+    public static IHtmlContent productLine(dynamic item, Func<dynamic, IHtmlContent> template)
+    {
+        var html = new HtmlContentBuilder();
+
+        html.AppendHtml(template(item));
+
+        return html;
+    }
+    }

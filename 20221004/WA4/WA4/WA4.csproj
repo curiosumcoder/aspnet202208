@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WA4.UI.Basic\WA4.UI.Basic.csproj" />
+    <ProjectReference Include="D:\aspnet202208\20220920\WA50\Northwind.Store.Data\Northwind.Store.Data.csproj" />
+    <ProjectReference Include="D:\aspnet202208\20220920\WA50\Northwind.Store.Model\Northwind.Store.Model.csproj" />
+  </ItemGroup>
+
+</Project>
