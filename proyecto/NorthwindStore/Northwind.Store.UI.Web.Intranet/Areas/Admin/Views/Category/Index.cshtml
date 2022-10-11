@@ -29,18 +29,20 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.CategoryName)
+                @* @item.CategoryName *@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
 @*                @Html.DisplayFor(modelItem => item.Picture)*@
-                    <img src="@Url.Action("ReadImage", new { id = item.CategoryId })"
-                     alt="Imagen de @item.CategoryName" />
+@*                    <img src="@Url.Action("ReadImage", new { id = item.CategoryId })"
+                     alt="Imagen de @item.CategoryName" />*@
+                    <img src="@item.PictureBase64" alt="Imagen de @item.CategoryName" />
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CategoryId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.CategoryId">Details</a> |
+                <a asp-action="Edit" asp-route-id="@item.CategoryId">Edit</a> |
                 <a asp-action="Delete" asp-route-id="@item.CategoryId">Delete</a>
             </td>
         </tr>

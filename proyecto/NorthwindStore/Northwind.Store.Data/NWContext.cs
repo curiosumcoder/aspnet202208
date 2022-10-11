@@ -79,6 +79,8 @@ namespace Northwind.Store.Data
 
             modelBuilder.Entity<Category>(entity =>
             {
+                //entity.ToTable("Categories");
+
                 entity.HasIndex(e => e.CategoryName, "CategoryName");
 
                 entity.Property(e => e.CategoryId).HasColumnName("CategoryID");

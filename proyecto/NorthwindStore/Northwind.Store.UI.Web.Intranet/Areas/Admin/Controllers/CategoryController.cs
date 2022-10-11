@@ -66,7 +66,7 @@ namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
                     picture.CopyTo(ms);
                     category.Picture = ms.ToArray();
                 }
-
+                
                 _context.Add(category);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
