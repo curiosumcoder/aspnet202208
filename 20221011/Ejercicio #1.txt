@@ -1,0 +1,42 @@
+Desarrollo de Aplicaciones con ASP.NET Core MVC
+Gilberto Bermúdez Garro.
+gbermude@outlook.com
+
+---------------------------------------------------------------------------------------------------
+Ejercicio #1
+
+Objetivo: Modificar una aplicación de ASP.NET Core MVC para incorporar el uso del EF Core y usando 
+la técnica de Scaffolding para la generación de controladores y vistas.
+
+---------------------------------------------------------------------------------------------------
+Actividades
+
+1. Agregar al proyecto Northwind.Store.UI.Web.Intranet los controladores y sus vistas 
+correspondientes para permitir un CRUD (Create, Read, Update, Delete) sobre las tablas de la base
+de datos Northwind: Customers, Employees, Products, Region, Shippers, Suppliers, Territories, 
+Orders y Order Details.
+
+Todos los controladores deben incorporarse en el Área de Admin, en nombre de los controladores
+debe de redactarse en singular, Ej.: CustomerController, EmployeeController.
+
+2. Modificar la acción Index del controlador Admin/OrderController para habilitar la paginación
+por cada 10 elementos.
+
+En la vista Admin/Views/Order/Index.cshtml a efectos de la paginación se deben habilitar
+las acciones de: primera página, números de página y última página, como base ver el componente
+de paginación de Bootstrap, https://getbootstrap.com/docs/5.1/components/pagination/
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
+
+3. Modificar el controlador Admin/CategoryController para permitir visualizar la imagen asociada
+a la categoría en las acciones de: Details, Delete y Edit.
+
+## ÚLTIMA LÍNEA ##

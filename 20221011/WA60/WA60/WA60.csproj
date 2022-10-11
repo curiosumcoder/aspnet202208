@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Northwind.Store.Data">
+      <HintPath>..\..\..\proyecto\NorthwindStore\Northwind.Store.Data\bin\Debug\net6.0\Northwind.Store.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Northwind.Store.Model">
+      <HintPath>..\..\..\proyecto\NorthwindStore\Northwind.Store.Model\bin\Debug\net6.0\Northwind.Store.Model.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
