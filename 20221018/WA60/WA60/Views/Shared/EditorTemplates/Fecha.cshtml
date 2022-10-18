@@ -1,0 +1,12 @@
+﻿@model DateTime
+
+<br />
+<input type="number" value="@Model.Day" step="1" min="1" max="31" "  />
+<input type="number" value="@Model.Month" step="1" min="1" max="12" />
+<input type="number" value="@Model.Year" step="1" min="@(Model.Year-1)" />
+
+<style>
+    :invalid { 
+        border: 2px red solid;
+    }
+</style>

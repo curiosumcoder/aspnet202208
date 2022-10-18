@@ -9,3 +9,10 @@
     <li><a asp-action="Product4">Ejemplo 4</a></li>
 </ul>
 
+@Html.DisplayFor(m => DateTime.Now)
+@Html.DisplayFor(m => DateTime.Now, "Fecha")
+
+<hr/>
+
+@Html.EditorFor(m => DateTime.Now)
+@Html.EditorFor(m => DateTime.Now, "Fecha")
