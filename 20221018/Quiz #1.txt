@@ -1,0 +1,74 @@
+Curso: ASP.NET Core MVC
+Quiz
+
+Objetivo: Crear aplicación de ASP.NET Core MVC para el mantenimiento de datos
+(create, read, update, delete) de una tabla en base de datos.
+
+Valor: 10 puntos.
+
+Materiales: Se entrega script para crear la tabla ToDo. Se recomienda crear
+una base de datos nueva.
+
+	CREATE TABLE [ToDo](
+		[Id] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+		[Title] [nvarchar](50) NOT NULL,
+		[Due] [date] NULL
+	) 
+
+Ejercicios.
+
+1. 	Crear aplicación con la platilla de ASP.NET Core MVC.
+
+## Valor: 1 punto.
+
+2. 	Crear dentro de la aplicación recien creada la clase de contexto y
+	modelos necesarios para la conexión a base de datos y dar mantenimiento a 
+	datos de la tabla ToDo, todo ello haciendo uso del Entity Framework Core.
+	Puede dejar el código resultante en la carpeta Models.  (-o Models)
+	
+## Valor: 2 puntos.
+
+3. 	Crear un nuevo controlador con el nombre ToDo que cuente con las acciones
+	y la vistas necesarias para poder hacer el mantenimiento de datos (CRUD) de 
+	la tabla ToDo.
+## Valor: 2 puntos.
+
+4. 	Modificar el menú pricipal de la aplicación para agregar un nuevo
+	enlace de forma que se puede usar para llegar hasta la vista Index del
+	controlador ToDo.
+	
+## Valor: 1 punto.
+
+5. 	Modificar en el controlador ToDo la vista Index y su acción correspondiente
+	para que la lista de ToDo's sea paginada por cada 4 elementos.
+
+	Se debe ofrecer en la vista la posibilidad de navegar entre páginas.
+	
+	1, 2, 3, 4, ...
+
+	Al ingregar a la acción Index la primera vez se obtiene al menos la primera 
+	págida de datos existentes.
+
+## Valor: 2 puntos.
+
+6. 	Modificar en el controlador ToDo la vista Index y su acción correspondiente
+	para permitir la búsqueda de los ToDo's por el campo Title, de forma
+	que cualquier caracter digitado como filtro por el usuario pueda ser
+	utilizado para buscar en los datos de campo Title.
+
+	Los resultados de la búsqueda se presentan en la misma vista.
+
+	Al ingregar a la acción Index la primera vez se obtiene al menos la primera 
+	págida de datos existentes, sin filtrar.
+
+	Se debe mantener el funcionamiento de la paginación aun cuando los datos están 
+	filtrados. El valor del filtro para la búsqueda utilizado no se limpia mientras 
+	se esté en la vista Index.
+
+## Valor: 2 puntos.
+
+OPCIONAL: Modificar en el controlador ToDo la vista Index y su acción 
+correspondiente, para que el resultados del filtrado y el paginado solamente refresque 
+la porción correspondiente al resultado, esto por medio del uso de AJAX.
+
+## ÚLTIMA LÍNEA ##
