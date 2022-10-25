@@ -1,0 +1,66 @@
+Desarrollo de Aplicaciones con ASP.NET Core MVC
+Gilberto Bermúdez Garro.
+gbermude@outlook.com
+
+---------------------------------------------------------------------------------------------------
+Quiz
+
+Valor: 20 puntos.
+
+Objetivo: Aplicar los conceptos aprendidos con el desarrollo de aplicaciones ASP.NET Core MVC.
+
+Sobre la solución NorthwindStore donde se construye el proyecto del curso se deberá crear una 
+aplicación Web (se propone el nombre Northwind.Store.UI.Web.Internet) orientada para dispositivos 
+móbiles que funcione como un carrito de compras, esta aplicación deberá permitir consultar los 
+productos de la base de datos Northwind, que se pueda obtener el detalle del producto de la lista, 
+una vez en su detalle poder agregarlo a su "carrito", se puede ver el detalle del carrito y 
+finalmente hacer un "checkout" que producirá el registro de la orden y sus detalles.
+
+Utilice las herramientas del desarrollador del Google Chrome para probar la aplicación emulando
+el dispositivo iPhone.
+
+Opcional: Habilitar en el proyecto Web la autenticación y autorización de usuarios.
+
+---------------------------------------------------------------------------------------------------
+Actividades
+
+1. Crear una primer vista desde donde se pueda hacer la búsqueda por el nombre del producto. El
+resultado se debe presentar en una lista, cada elemento de la lista una vez que se haga clic debería
+llevar a otra vista que permita visualizar el detalle del producto seleccionado. 5 puntos.
+
+Utilizar como base para la presentación de la lista de los resultados la base del HTML del list-group
+de Bootstrap. https://getbootstrap.com/docs/5.2/components/list-group/
+
+Ver la página Index en el archivo Quiz.pdf como una base del resultado visual esperado.
+
+Debe haber en la parte superior derecha un icono de carrito de compras, si a este icono se le 
+hace clic se debe llevar a otra vista donde se visualice la lista de productos en el carrito de
+compras, a su derecha debe colocarse el número de productos en el carrito. 
+Debe existir otro icono de una casa en la parte superior izquierda al hacer clic en este 
+se debe regresar nuevamente a esta vista de búsqueda de productos. Estos iconos deben funcionar en
+todas las vistas de esta aplicación.
+
+2. Crear una segunda vista donde se puede visualizar el detalle de un producto, a este detalle
+de producto se llega desde la vista principal de la aplicación en donde se pueden buscar productos.
+5 puntos.
+
+Ver la página "Product Detail" en el archivo Quiz.pdf como una base del resultado visual esperado.
+
+Al hacer clic en el botón Agregar el producto se debe agregar al carrito de comprar el nuevo 
+producto, una vez agregado se debe mostrar la vista del detalle del carrito, donde se muestra
+la lista de productos en el carrito y desde aquí poder Comprar creando una nueva orden de compra
+y su detalle correspondiente.
+
+3. Crear una tercera vista en donde se presenta el contenido actual del carrito, una lista
+de todos los productos agregados al carrito. 5 puntos.
+
+Ver la página "Cart Detail" en el archivo Quiz.pdf como una base del resultado visual esperado.
+
+4. Agregar soporte a la vista de "Cart Detail" para crear una nueva orden de compra. 5 puntos.
+
+Al hacer clic en el botón Comprar se debe crear una nueva orden de compra y su detalle 
+correspondiente. Una vez creada la orden y sus detalles se debe limpiar el carrito, la 
+verificación de la existencia de la nueva orden se hace en la aplicación 
+Northwind.Store.UI.Web.Intranet.
+
+## ÚLTIMA LÍNEA ##
