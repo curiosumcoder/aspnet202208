@@ -1,0 +1,27 @@
+﻿@model WA70.ViewModels.CartViewModel
+
+@if (Model != null && Model.Items.Any())
+{
+    <table class="table">
+        <thead>
+            <tr><th>Product</th><th>Price</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model.Items)
+            {
+                <tr>
+                    <td>@p.ProductName</td>
+                    <td>@p.UnitPrice?.ToString("n")</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr><th>Items Count</th><td>@Model.Count</td></tr>
+            <tr><th>Items Total</th><td>@Model.Total.ToString("n")</td></tr>
+        </tfoot>
+    </table>
+}
+else
+{
+    <h3>Your cart is empty! 😮</h3>
+}
