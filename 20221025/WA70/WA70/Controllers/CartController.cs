@@ -17,6 +17,11 @@ namespace WA70.Controllers
             _rs = new RequestSettings(this);
         }
 
+        public IActionResult Index()
+        {
+            return View(_ss.Cart);
+        }
+
         public ActionResult Add(int? id)
         {
 
