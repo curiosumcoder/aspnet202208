@@ -1,5 +1,16 @@
 ﻿@model WA70.ViewModels.CartViewModel
 
+@{
+    var pa = (Product)ViewBag.productAdded;
+    var paName = TempData["ProductName"];
+}
+@if (pa != null)
+{
+    <div class="alert alert-info" role="alert">
+        Nuevo producto: @pa.ProductName!
+    </div>
+}
+
 @if (Model != null && Model.Items.Any())
 {
     <table class="table">
