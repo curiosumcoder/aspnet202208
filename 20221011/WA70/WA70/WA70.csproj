@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Northwind.Store.Data">
+      <HintPath>..\..\..\proyecto\NorthwindStore\Northwind.Store.Data\bin\Release\net6.0\Northwind.Store.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Northwind.Store.Model">
+      <HintPath>..\..\..\proyecto\NorthwindStore\Northwind.Store.Data\bin\Release\net6.0\Northwind.Store.Model.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
