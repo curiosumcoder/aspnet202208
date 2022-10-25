@@ -1,8 +1,10 @@
+using Northwind.Store.Data;
 using WA70;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<NWContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddMemoryCache();

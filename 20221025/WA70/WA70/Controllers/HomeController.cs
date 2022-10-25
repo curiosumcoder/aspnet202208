@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Northwind.Store.Data;
 using System.Diagnostics;
 using WA70.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace WA70.Controllers
 {
@@ -8,11 +10,13 @@ namespace WA70.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly SessionSettings _ss;
+        private readonly NWContext _db;
 
-        public HomeController(ILogger<HomeController> logger, SessionSettings ss)
+        public HomeController(ILogger<HomeController> logger, SessionSettings ss, NWContext db)
         {
             _logger = logger;
             _ss = ss;
+            _db = db;
         }
 
         public IActionResult Index()
@@ -38,7 +42,7 @@ namespace WA70.Controllers
             ViewBag.welcome = _ss.Welcome;
             #endregion
 
-            return View();
+            return View(_db.Products.Include(p => p.Category).ToList());
         }
 
         public IActionResult Privacy()
