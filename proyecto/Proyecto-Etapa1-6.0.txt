@@ -1,0 +1,75 @@
+Desarrollo de Aplicaciones con ASP.NET Core MVC
+Gilberto Bermúdez Garro.
+gbermude@outlook.com
+
+---------------------------------------------------------------------------------------------------
+Proyecto
+
+Objetivos: Establecer una arquitectura de aplicación Web inicial
+utilizando ASP.NET Core MVC 6.0, en donde se permite el registro y consulta de datos
+de una tienda en línea. Los objetivos del proyecto final están
+estructurados en cada proyecto de la solución NorthwindStore.
+
+* Northwind.Store.UI.Intranet
+
+1. Incorporar mantenimientos (CRUD) en el Área de Admin. 10 puntos.
+	
+	Hacerlo con Scaffolding y cambiar el acceso a datos con Repository.
+	
+	Aplicar el uso del Repository en Customers, Employees, Products, Region, Shippers, 
+	Suppliers, Territories, Orders. Agregar en el menú principal en la sección
+	correspondiente a Admin, los enlaces para llegar a los controladores
+	recientemente creados.
+	
+	Agregar a la acción de Details del controlador de Orders, que se muestre
+	el detalle de los productos de la orden y el monto total de la misma.
+
+	* Opcional 1: Agregar que los listados obtenidos en la acción de Index de los controladores 
+	agregados, permitan: paginación, y ordenamiento por una columna (el usuario puede
+	ordenar por una columna a la vez).
+
+	* Opcional 2: Que el listado obtenido en "Opcional 1" funcione de
+	forma asincrónica (Partial Rendering) haciendo uso de una técnica AJAX.
+	
+2. Modificar el controlador de Product en el Área de Admin. 10 puntos.
+
+	Agregar a la tabla de Products un campo para guardar una imagen.
+	
+	Modificar el controlador de Product para que permita la 
+	modificación de la imagen, así como mostrar la imagen al momento de 
+	eliminar el producto y que se obtiene el detalle de la misma.
+
+	- Agregar la gestión de imágen para Producto.
+		- Poder asignarla al crear.
+		- Poder visualizar en el detalle y el detalle antes de eliminar.
+		- Poder cambiar al modificar.
+		
+	- Agregar anotaciones de validación al resto
+	de propiedades del Producto para que sean requeridas.
+
+3. Agregar un controlador Home en el Área de Admin, y cambiar la vista Index 
+del controlador Home en el Área de Admin. 10 puntos.
+
+Se debe modificar la vista para mostrar un listado de las Órdenes en la 
+base de datos de Northwind, se deben mostrar los siguientes campos:
+
+	- ContactName (viene de la tabla Customers)
+	- OrderDate
+    - ShipCity
+    - ShipCountry
+	- Total (debe ser la sumatoria del precio de todos sus artículos por su cantidad)
+	- "Detail" proveer un enlace para ir al controlador Order y obtener el detalle
+	de la orden.
+	
+	El ordenamiento del listado se hace inicialmente por medio del campo OrderDate
+	y de forma descendente.
+	
+	Se requiere autenticación para ingresar a todos los controladores y sus
+	acciones que existan dentro en el Área de Admin.
+	
+	* Opcional 1: Permitir el ordenamiento y paginado del listado que se obtiene,
+	hacerlo de forma que el encabezado de cada columna en la lista de órdenes
+	sirva como un enlace y al hacer clic cambie el ordenamiento de Ascendente a Descendente
+	y que se actualice el listado.
+	
+## ÚLTIMA LÍNEA ##

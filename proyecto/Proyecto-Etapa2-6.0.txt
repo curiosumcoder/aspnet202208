@@ -1,0 +1,37 @@
+Desarrollo de Aplicaciones con ASP.NET Core MVC
+Gilberto Bermúdez Garro.
+gbermude@outlook.com
+
+---------------------------------------------------------------------------------------------------
+Proyecto
+
+Objetivos: Establecer una arquitectura de aplicación Web inicial
+utilizando ASP.NET Core MVC 6, en donde se permite el registro y consulta de datos
+de una tienda en línea. Los objetivos del proyecto final están
+estructurados en cada proyecto de la solución Northwind.Store.
+
+* Northwind.Store.UI.Internet (Quiz #2)
+
+1. Modificar la vista Home/Index en donde se hace la búsqueda de artículos. 10 puntos.
+
+	Modificar la vista para que la búsqueda se ejecute desde el HTML resultante
+	de forma asincrónica utilizando AJAX, de forma que la actualización de los
+	resultados de la búsqueda solamente actualicen a la lista y no así a toda
+	la vista.
+	
+	Los resultados que se generen del lado del servidor deben emitirse
+	para que se guarden del lado del cliente por al menos 10 segundos, y 
+	se usará el valor del filtro que se envía como diferenciador, de esta
+	forma si se hace una búsqueda por la palabra "queso" el resultado
+	se debe guardar en el cache del cliente por al menos 10 segundos, y así 
+	con cualquier otro filtro, si en la duración de ese tiempo se busca 
+	con la misma palabra el resultado debería obtenerse desde el caché.
+	
+2. Hacer la publicación de las aplicaciones Northwind.Store.UI.Internet y
+   Northwind.Store.UI.Intranet en IIS. 10 puntos.
+	
+	Crear dos nuevos Web Sites o Web Applications en IIS y hacer la publicación 
+	(deployment) de las aplicaciones Northwind.Store.UI.Internet e
+	Northwind.Store.UI.Intranet.
+   
+## ÚLTIMA LÍNEA ##
