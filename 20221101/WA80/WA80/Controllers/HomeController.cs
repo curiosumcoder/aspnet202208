@@ -139,6 +139,7 @@ namespace WA80.Controllers
             var cts = new CancellationTokenSource();
             _cache.Set(CacheKeys.DependentCTS, cts);
 
+            // https://learn.microsoft.com/en-us/aspnet/core/performance/caching/memory?view=aspnetcore-6.0#cache-dependencies
             using (var entry = _cache.CreateEntry(CacheKeys.Parent))
             {
                 // expire this entry if the dependant entry expires.
@@ -215,11 +216,11 @@ namespace WA80.Controllers
         }
 
         //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        //[ResponseCache(Duration = 10, Location = ResponseCacheLocation.Client)]
+        [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Client)]
         //[ResponseCache(Duration = 10,
         //    Location = ResponseCacheLocation.Client,
         //    VaryByQueryKeys = new string[] { "param1" })]
-        [ResponseCache(CacheProfileName = "NoCaching")]
+        //[ResponseCache(CacheProfileName = "NoCaching")]
         public IActionResult Privacy()
         {
             System.Diagnostics.Debug.WriteLine($"Privacy: {DateTime.Now}");

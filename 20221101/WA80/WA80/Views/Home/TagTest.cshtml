@@ -9,7 +9,7 @@
 <div class="d-flex flex-row bd-highlight mb-3">
     <div class="p-2 bd-highlight">
         <dl>
-            <dt>Default 20 minutes</dt>
+            <dt>Default time on cache: 20 minutes</dt>
             <dd><cache>@DateTime.Now</cache></dd>
             @*<distributed-cache></distributed-cache>*@
             <dt>Enabled</dt>
@@ -102,4 +102,5 @@
     </div>
 </div>
 @*<cache>
+    @DateTime.Now.ToString()
 </cache>*@
