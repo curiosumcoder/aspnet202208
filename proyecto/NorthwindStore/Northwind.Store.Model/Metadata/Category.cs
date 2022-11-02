@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Xml.Linq;
 
 namespace Northwind.Store.Model
 {
     [ModelMetadataType(typeof(CategoryMetadata))]
-    public partial class Category
+    public partial class Category : ModelBase
     {
         [NotMapped]
         public string PictureBase64

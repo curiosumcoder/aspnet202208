@@ -13,7 +13,7 @@ builder.Services.AddResponseCaching();
 var mvc = builder.Services.AddControllersWithViews(options =>
 {
     options.CacheProfiles.Add("Basic", new CacheProfile()
-    {
+    {        
         Duration = 10
     });
     options.CacheProfiles.Add("NoCaching", new CacheProfile()
@@ -35,6 +35,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseResponseCaching();
 
 app.UseRouting();
 

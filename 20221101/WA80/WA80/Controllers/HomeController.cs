@@ -216,11 +216,11 @@ namespace WA80.Controllers
         }
 
         //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Client)]
         //[ResponseCache(Duration = 10,
         //    Location = ResponseCacheLocation.Client,
         //    VaryByQueryKeys = new string[] { "param1" })]
-        //[ResponseCache(CacheProfileName = "NoCaching")]
+        [ResponseCache(CacheProfileName = "NoCaching")]
+        //[ResponseCache(Duration = 10, Location = ResponseCacheLocation.Client)]
         public IActionResult Privacy()
         {
             System.Diagnostics.Debug.WriteLine($"Privacy: {DateTime.Now}");
