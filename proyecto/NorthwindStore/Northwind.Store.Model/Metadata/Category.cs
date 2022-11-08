@@ -25,6 +25,8 @@ namespace Northwind.Store.Model
         public class CategoryMetadata
         {
             [Display(Name = "Nombre de Categoría")]
+            [Required(ErrorMessage = "La {0} es requerida.")]
+            [StringLength(15, MinimumLength = 4, ErrorMessage = "Se requiere entre {2} y {1} caracteres.")]
             public string CategoryName { get; set; } = null!;
 
             [Display(Name = "Descripción")]

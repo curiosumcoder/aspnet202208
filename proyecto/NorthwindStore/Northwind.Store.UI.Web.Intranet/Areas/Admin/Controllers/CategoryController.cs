@@ -24,7 +24,7 @@ namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
         // GET: Category
         public async Task<IActionResult> Index()
         {
-              return View(await _cr.GetList());
+            return View(await _cr.GetList());
         }
 
         // GET: Category/Details/5
@@ -99,7 +99,8 @@ namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CategoryId,CategoryName,Description,Picture")] Category category)
+        public async Task<IActionResult> Edit(int id,
+            [Bind("CategoryId,CategoryName,Description,RowVersion,ModifiedProperties")] Category category, IFormFile picture)
         {
             if (id != category.CategoryId)
             {
@@ -124,6 +125,14 @@ namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
                 //        throw;
                 //    }
                 //}
+
+                if (picture != null)
+                {
+                    // using System.IO;
+                    using MemoryStream ms = new();
+                    picture.CopyTo(ms);
+                    category.Picture = ms.ToArray();
+                }
 
                 category.State = Model.ModelState.Modified;
                 await _cr.Save(category);

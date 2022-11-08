@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="CategoryId" />
             <div class="form-group">
@@ -25,9 +25,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Picture" class="control-label"></label>
-                <input asp-for="Picture" class="form-control" />
+@*                <input asp-for="Picture" class="form-control" />*@
+                <input type="file" name="Picture" class="form-control" />
                 <span asp-validation-for="Picture" class="text-danger"></span>
+                <img src="@Model.PictureBase64" alt="Imagen de @Model.CategoryName" />
             </div>
+            <input type="hidden" asp-for="RowVersion" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
