@@ -9,6 +9,12 @@
     }
   },
   {
+    "outputFileName": "wwwroot/js/forms.min.js",
+    "inputFiles": [
+      "wwwroot/js/forms.js"
+    ]
+  },
+  {
     "outputFileName": "wwwroot/css/site.min.css",
     "inputFiles": [
       "wwwroot/css/site.css"

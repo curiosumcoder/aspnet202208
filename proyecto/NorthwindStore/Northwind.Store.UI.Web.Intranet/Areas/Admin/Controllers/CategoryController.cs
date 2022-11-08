@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -13,29 +14,28 @@ namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
     [Area("Admin")]
     public class CategoryController : Controller
     {
-        private readonly NWContext _context;
+        private readonly CategoryRepository _cr;
 
-        public CategoryController(NWContext context)
+        public CategoryController(CategoryRepository cr)
         {
-            _context = context;
+            _cr = cr;
         }
 
         // GET: Category
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Categories.ToListAsync());
+              return View(await _cr.GetList());
         }
 
         // GET: Category/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CategoryId == id);
+            var category = await _cr.Get(id.Value);
             if (category == null)
             {
                 return NotFound();
@@ -66,9 +66,13 @@ namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
                     picture.CopyTo(ms);
                     category.Picture = ms.ToArray();
                 }
-                
-                _context.Add(category);
-                await _context.SaveChangesAsync();
+
+                //_context.Add(category);
+                //await _context.SaveChangesAsync();
+
+                category.State = Model.ModelState.Added;
+                await _cr.Save(category);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -77,12 +81,12 @@ namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
         // GET: Category/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories.FindAsync(id);
+            var category = await _cr.Get(id.Value);
             if (category == null)
             {
                 return NotFound();
@@ -104,22 +108,26 @@ namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(category);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CategoryExists(category.CategoryId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                //try
+                //{
+                //    _context.Update(category);
+                //    await _context.SaveChangesAsync();
+                //}
+                //catch (DbUpdateConcurrencyException)
+                //{
+                //    if (!CategoryExists(category.CategoryId))
+                //    {
+                //        return NotFound();
+                //    }
+                //    else
+                //    {
+                //        throw;
+                //    }
+                //}
+
+                category.State = Model.ModelState.Modified;
+                await _cr.Save(category);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -128,13 +136,15 @@ namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
         // GET: Category/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CategoryId == id);
+            //var category = await _context.Categories
+            //    .FirstOrDefaultAsync(m => m.CategoryId == id);
+            var category = await _cr.Get(id.Value);
+
             if (category == null)
             {
                 return NotFound();
@@ -148,43 +158,40 @@ namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Categories == null)
-            {
-                return Problem("Entity set 'NWContext.Categories'  is null.");
-            }
-            var category = await _context.Categories.FindAsync(id);
-            if (category != null)
-            {
-                _context.Categories.Remove(category);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            //if (_context.Categories == null)
+            //{
+            //    return Problem("Entity set 'NWContext.Categories'  is null.");
+            //}
+            //var category = await _context.Categories.FindAsync(id);
+            //if (category != null)
+            //{
+            //    _context.Categories.Remove(category);
+            //}
 
-        private bool CategoryExists(int id)
-        {
-          return _context.Categories.Any(e => e.CategoryId == id);
+            //await _context.SaveChangesAsync();
+
+            await _cr.Delete(id);
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<FileStreamResult> ReadImage(int id)
         {
-            FileStreamResult result = null;
+            //FileStreamResult result = null;
 
-            var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CategoryId == id);
+            //var category = await _context.Categories
+            //    .FirstOrDefaultAsync(m => m.CategoryId == id);
 
-            if (category != null)
-            {
-                var stream = new MemoryStream(category.Picture);
+            //if (category != null)
+            //{
+            //    var stream = new MemoryStream(category.Picture);
 
-                if (stream != null)
-                {
-                    result = File(stream, "image/png");
-                }
-            }
+            //    if (stream != null)
+            //    {
+            //        result = File(stream, "image/png");
+            //    }
+            //}
 
-            return result;
+            return File(await _cr.GetFileStream(id), "image/png"); ;
         }
     }
 }

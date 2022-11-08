@@ -16,7 +16,7 @@ namespace Northwind.Store.Model
         [ScaffoldColumn(false)]
         [ConcurrencyCheck]
         [Timestamp]
-        public byte[] RowVersion { get; set; }
+        public byte[] RowVersion { get; set; } = new byte[0];
 
         /// <summary>
         /// Estado actual del objeto modelo.

@@ -17,6 +17,7 @@ namespace Northwind.Store.Data
         {
             var result = await base.Get(key);
 
+            // Se puede leer la imagen a base64 usando el método siguiente
             //result.PictureBase64 = await GetFileBase64(key);
 
             return result;

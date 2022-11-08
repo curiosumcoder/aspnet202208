@@ -21,6 +21,7 @@ namespace Northwind.Store.Model
                 return result;
             }
         }
+
         public class CategoryMetadata
         {
             [Display(Name = "Nombre de Categoría")]
