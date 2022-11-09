@@ -58,9 +58,9 @@ namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoryId,CategoryName,Description,Picture")] Category category, IFormFile picture)
+        public async Task<IActionResult> Create([Bind("CategoryId,CategoryName,Description")] Category category, IFormFile picture)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid || (!ModelState.IsValid && ModelState.ErrorCount == 1 && ModelState.Any(e => e.Key == "picture")))
             {
                 if (picture != null)
                 {
@@ -74,7 +74,15 @@ namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
                 //await _context.SaveChangesAsync();
 
                 category.State = Model.ModelState.Added;
-                await _cr.Save(category);
+                await _cr.Save(category, ns);
+
+                if (ns.Count > 0)
+                {
+                    var msg = ns[0];
+                    ModelState.AddModelError("", $"{msg.Title} - {msg.Description}");
+
+                    return View(category);
+                }
 
                 return RedirectToAction(nameof(Index));
             }
@@ -110,7 +118,7 @@ namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid || (!ModelState.IsValid && ModelState.ErrorCount == 1 && ModelState.Any(e => e.Key == "picture")))
             {
                 //try
                 //{

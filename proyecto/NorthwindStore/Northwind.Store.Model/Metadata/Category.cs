@@ -16,7 +16,7 @@ namespace Northwind.Store.Model
                 if (Picture != null)
                 {
                     var base64 = Convert.ToBase64String(Picture);
-                    result = $"data:image/jpg;base64,{base64}";
+                    result = $"data:image/png;base64,{base64}";
                 }
                 return result;
             }

@@ -1,4 +1,6 @@
-﻿namespace Northwind.Store.Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Northwind.Store.Model
 {
     /// <summary>
     /// [Table("Categories")]
