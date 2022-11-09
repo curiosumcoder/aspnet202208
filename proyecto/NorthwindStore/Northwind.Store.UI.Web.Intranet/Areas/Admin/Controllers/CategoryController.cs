@@ -8,12 +8,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Northwind.Store.Data;
 using Northwind.Store.Model;
+using Northwind.Store.Notification;
 
 namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class CategoryController : Controller
     {
+        private readonly Notifications ns = new();
+
         private readonly CategoryRepository _cr;
 
         public CategoryController(CategoryRepository cr)
@@ -135,7 +138,15 @@ namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
                 }
 
                 category.State = Model.ModelState.Modified;
-                await _cr.Save(category);
+                await _cr.Save(category, ns);
+
+                if (ns.Count > 0)
+                {
+                    var msg = ns[0];
+                    ModelState.AddModelError("", $"{msg.Title} - {msg.Description}");
+
+                    return View(category);
+                }
 
                 return RedirectToAction(nameof(Index));
             }
