@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Northwind.Store.Data;
+using Northwind.Store.Model;
 using Northwind.Store.UI.Web.Intranet.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<CategoryRepository>(); // Instancia por controlador
 //builder.Services.AddScoped<CategoryRepository>(); // Instancia por request
 //builder.Services.AddSingleton<CategoryRepository>(); // Única instancia para todos
+builder.Services.AddTransient<BaseRepository<Product, int>>();
 
 var app = builder.Build();
 

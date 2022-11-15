@@ -14,17 +14,21 @@ namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly NWContext _context;
+        private readonly BaseRepository<Product, int> _pr;
 
-        public ProductController(NWContext context)
+        public ProductController(NWContext context, BaseRepository<Product, int> pr)
         {
             _context = context;
+            _pr = pr;
         }
 
         // GET: Admin/Product
         public async Task<IActionResult> Index()
         {
-            var nWContext = _context.Products.Include(p => p.Category).Include(p => p.Supplier);
-            return View(await nWContext.ToListAsync());
+            //var nWContext = _context.Products.Include(p => p.Category).Include(p => p.Supplier);
+            //return View(await nWContext.ToListAsync());
+
+            return View(await  _pr.GetList());
         }
 
         // GET: Admin/Product/Details/5
