@@ -4,6 +4,15 @@ using Northwind.Store.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddCors(options =>
+ {
+     options.AddDefaultPolicy(builder =>
+     {
+         builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+         // Para un origen específico
+         //builder.WithOrigins("https://localhost:7229").AllowAnyHeader().AllowAnyMethod();
+     });
+ });
 
 var connectionString = builder.Configuration.GetConnectionString("NW");
 builder.Services.AddDbContextPool<NWContext>(options =>
@@ -26,6 +35,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors();
 
 app.MapControllers();
 
