@@ -79,7 +79,8 @@ namespace Northwind.Store.Services.Controllers
 
         // POST: api/Product
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [ValidateModel]
+        ///[ValidateModel]
+        ///[LogRequest]
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
