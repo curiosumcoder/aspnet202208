@@ -7,9 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Northwind.Store.Data;
 using Northwind.Store.Model;
+using Northwind.Store.Services.Filters;
 
 namespace Northwind.Store.Services.Controllers
 {
+    /// <summary>
+    /// [ValidateModel]
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -75,6 +79,7 @@ namespace Northwind.Store.Services.Controllers
 
         // POST: api/Product
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [ValidateModel]
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
@@ -103,6 +108,22 @@ namespace Northwind.Store.Services.Controllers
         private bool ProductExists(int id)
         {
             return _context.Products.Any(e => e.ProductId == id);
+        }
+
+
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(IEnumerable<Product>), StatusCodes.Status200OK)]
+        [HttpGet("Search/{filter:length(1,16)}")]
+        public async Task<ActionResult<IEnumerable<Product>>> SearchProduct(string filter = "")
+        {
+            var products = await _context.Products.Where(p => p.ProductName.Contains(filter)).ToListAsync();
+
+            if (products == null)
+            {
+                return NotFound();
+            }
+
+            return products;
         }
     }
 }
