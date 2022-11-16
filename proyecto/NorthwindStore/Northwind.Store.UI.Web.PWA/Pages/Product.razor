@@ -1,0 +1,136 @@
+﻿@using System.Text.Json;
+@using System.Text
+@using Northwind.Store.UI.Web.PWA.Client.Services
+
+@page "/product"
+@inject HttpClient Http
+@inject IProductService ps
+@inject IJSRuntime JsRuntime
+
+<h3>Products</h3>
+
+@switch (_state)
+{
+    case State.None:
+        <button @onclick="createNew" class="btn btn-primary">Create</button>
+        <form @onsubmit="onSearch">
+            <div class="form-group">
+                <label>Search</label>
+                <input class="form-control" @bind="filter" />
+            </div>
+            <button class="btn btn-primary">Search</button>
+        </form>
+
+        <hr />
+
+        @if (products == null)
+        {
+            <p><em>Searching... @filter</em></p>
+        }
+        else
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var p in products)
+                    {
+                        <tr>
+                            <td>@p.ProductName</td>
+                            <td>@p.UnitPrice</td>
+                            <td><button @onclick="@(() => { product = p; _state = State.Edit; })" class="btn btn-light">Select</button></td>
+                            <td><button @onclick="@(async () => { if (await Confirm()) { await onDelete(p.ProductId); } })" class="btn btn-warning">X</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        break;
+    case State.Edit:
+    case State.Create:
+        <h4>Create</h4>
+        <EditForm Model="product" OnValidSubmit="onSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group">
+                <label>Name</label>
+                <ValidationMessage For="@(() => product.ProductName)" />
+                <InputText class="form-control" @bind-Value="product.ProductName" />
+            </div>
+            <div class="form-group">
+                <label>Price</label>
+                <ValidationMessage For="@(() => product.UnitPrice)" />
+                <InputNumber class="form-control" @bind-Value="product.UnitPrice" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </EditForm>
+        break;
+}
+
+@code {
+    private Model.Product product;
+    private List<Model.Product> products = new List<Model.Product>();
+
+    string filter = "";
+    State _state = State.None;
+
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    products = await ps.Search(filter);
+    //}
+
+    public void createNew()
+    {
+        _state = State.Create;
+        product = new Model.Product();
+    }
+
+    public async Task onSubmit()
+    {
+        switch (_state)
+        {
+            case State.Create:
+                await ps.Create(product);
+                break;
+            case State.Edit:
+                await ps.Update(product);
+                break;
+        }
+
+        _state = State.None;
+
+        await Alert("Ready!");
+    }
+
+    public async Task onSearch()
+    {
+        products = null;
+        products = await ps.Search(filter);
+    }
+
+    public async Task onDelete(int id)
+    {
+        await ps.Delete(id);
+
+        await Alert("Ready!");
+    }
+
+    async Task Alert(string message)
+    {
+        await JsRuntime.InvokeVoidAsync("alert", message);
+    }
+
+    async Task<bool> Confirm()
+    {
+        return await JsRuntime.InvokeAsync<bool>("confirm", "¿Confirme que desea proceder con la acción?");
+    }
+}
