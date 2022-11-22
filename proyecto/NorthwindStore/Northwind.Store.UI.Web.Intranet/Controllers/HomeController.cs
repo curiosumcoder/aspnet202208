@@ -18,7 +18,11 @@ namespace Northwind.Store.UI.Web.Intranet.Controllers
 
         public IActionResult Index()
         {
-            throw new ApplicationException("Tenemos un problema");
+            //throw new ApplicationException("Tenemos un problema");
+
+            //return NotFound();
+            //return Forbid();
+            //return Unauthorized();
 
             return View();
         }
@@ -48,7 +52,7 @@ namespace Northwind.Store.UI.Web.Intranet.Controllers
             else if (exceptionHandlerPathFeature?.Error is Microsoft.Data.SqlClient.SqlException)
             {
                 var ex = exceptionHandlerPathFeature?.Error;
-                exceptionMessage = $"Error en la SQL Server: {ex.Message}";
+                exceptionMessage = $"Error en el SQL Server: {ex.Message}";
                 _logger.LogError(exceptionMessage);
             }
 

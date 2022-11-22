@@ -59,6 +59,11 @@ else
     app.UseHsts();
 }
 
+// Status Codes
+//app.UseStatusCodePages();
+app.UseStatusCodePagesWithRedirects("/Home/ErrorWithCode?code={0}");
+//app.UseStatusCodePagesWithReExecute("/Home/ErrorWithCode", "?code={0}");
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
