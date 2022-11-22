@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ using Northwind.Store.Notification;
 
 namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
 {
+    //[Authorize]
     [Area("Admin")]
     public class CategoryController : Controller
     {
@@ -25,6 +27,7 @@ namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
         }
 
         // GET: Category
+        //[Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _cr.GetList());

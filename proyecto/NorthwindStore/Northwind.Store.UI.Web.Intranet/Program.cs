@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Northwind.Store.Data;
@@ -12,8 +13,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 //builder.Services.AddDbContext<NWContext>(options =>
 //    options.UseSqlServer(connectionString));
-builder.Services.AddDbContextPool<NWContext>(options =>
-    options.UseSqlServer(connectionString));
+builder.Services.AddDbContextPool<NWContext>(options => { 
+#if DEBUG
+                //options.LogTo(Console.WriteLine);
+#endif
+    options.UseSqlServer(connectionString);
+});
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -23,6 +28,17 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 //https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.mvcoptions.suppressimplicitrequiredattributefornonnullablereferencetypes?view=aspnetcore-6.0
 //builder.Services.AddControllersWithViews(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
+
+#region Autorización
+// Requerir autenticación para todo el sitio, se exceptúa
+// el uso específico de Authorize o AllowAnonymous. RECOMENDADO    
+builder.Services.AddAuthorization(options =>
+{
+    options.FallbackPolicy = new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .Build();
+});
+#endregion
 
 builder.Services.AddTransient<CategoryRepository>(); // Instancia por controlador
 //builder.Services.AddScoped<CategoryRepository>(); // Instancia por request
@@ -59,3 +75,14 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
+
+
+// SQL Injection
+// Cross-Site Scripting (XSS)
+// Cross-Site Request Forgery (XSRF/CSRF)
+// Open Redirect Attacks
+// Cross-Origin Requests (CORS)
+
+// Logging Levels: Trace = 0, Debug = 1, Information = 2 (*Default), Warning = 3, Error = 4, Critical = 5, and None = 6.	
+//
+// Providers: Console, Debug, *EventSource, EventLog	
