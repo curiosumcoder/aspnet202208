@@ -29,9 +29,9 @@ builder.Services.AddControllersWithViews();
 //https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.mvcoptions.suppressimplicitrequiredattributefornonnullablereferencetypes?view=aspnetcore-6.0
 //builder.Services.AddControllersWithViews(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
 
-#region Autorización
-// Requerir autenticación para todo el sitio, se exceptúa
-// el uso específico de Authorize o AllowAnonymous. RECOMENDADO    
+#region Autorizaciï¿½n
+// Requerir autenticaciï¿½n para todo el sitio, se exceptï¿½a
+// el uso especï¿½fico de Authorize o AllowAnonymous. RECOMENDADO    
 builder.Services.AddAuthorization(options =>
 {
     options.FallbackPolicy = new AuthorizationPolicyBuilder()
@@ -42,7 +42,7 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddTransient<CategoryRepository>(); // Instancia por controlador
 //builder.Services.AddScoped<CategoryRepository>(); // Instancia por request
-//builder.Services.AddSingleton<CategoryRepository>(); // Única instancia para todos
+//builder.Services.AddSingleton<CategoryRepository>(); // ï¿½nica instancia para todos
 builder.Services.AddTransient<BaseRepository<Product, int>>();
 
 var app = builder.Build();

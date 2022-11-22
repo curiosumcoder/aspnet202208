@@ -8,9 +8,9 @@ builder.Services.AddCors(options =>
  {
      options.AddDefaultPolicy(builder =>
      {
-         builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+         //builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
          // Para un origen específico
-         //builder.WithOrigins("https://localhost:7229").AllowAnyHeader().AllowAnyMethod();
+         builder.WithOrigins("https://localhost:7009").AllowAnyHeader().AllowAnyMethod();
      });
  });
 
