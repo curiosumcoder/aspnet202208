@@ -10,7 +10,7 @@ builder.Services.AddCors(options =>
      {
          //builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
          // Para un origen específico
-         builder.WithOrigins("https://localhost:7009").AllowAnyHeader().AllowAnyMethod();
+         builder.WithOrigins("https://localhost:7009").WithMethods("GET");
      });
  });
 
