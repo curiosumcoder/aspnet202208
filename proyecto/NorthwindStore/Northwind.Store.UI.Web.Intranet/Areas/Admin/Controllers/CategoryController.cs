@@ -10,9 +10,11 @@ using Microsoft.EntityFrameworkCore;
 using Northwind.Store.Data;
 using Northwind.Store.Model;
 using Northwind.Store.Notification;
+using Northwind.Store.UI.Web.Intranet.Filters;
 
 namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
 {
+    [ResponseHeader("X-Northwind-Version", "1.0")]
     //[Authorize]
     [Area("Admin")]
     public class CategoryController : Controller

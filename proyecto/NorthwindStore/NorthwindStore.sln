@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.Store.Notificatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.Store.Services", "Northwind.Store.Services\Northwind.Store.Services.csproj", "{A3676C26-291A-4F01-BC02-13B4CA3F2675}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.Store.UI.Web.PWA", "Northwind.Store.UI.Web.PWA\Northwind.Store.UI.Web.PWA.csproj", "{D67CC106-CADD-427F-B29B-006004A28036}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.Store.UI.Web.PWA", "Northwind.Store.UI.Web.PWA\Northwind.Store.UI.Web.PWA.csproj", "{D67CC106-CADD-427F-B29B-006004A28036}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

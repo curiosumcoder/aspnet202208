@@ -122,9 +122,17 @@ namespace Northwind.Store.Data
                 .ToListAsync();
         }
 
-        public virtual Task<int> Delete(TK key)
+        public virtual async Task<int> Delete(TK key)
         {
-            return Task.FromResult(0);
+            var data = await _db.FindAsync<T>(key);
+
+            if (data != null)
+            {
+                data.State = ModelState.Deleted;
+                return await Save(data);
+            }
+
+            return await Task.FromResult(0);
         }
 
         #region Concurrencia
