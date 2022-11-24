@@ -13,9 +13,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 //builder.Services.AddDbContext<NWContext>(options =>
 //    options.UseSqlServer(connectionString));
-builder.Services.AddDbContextPool<NWContext>(options => { 
+builder.Services.AddDbContextPool<NWContext>(options =>
+{
 #if DEBUG
-                //options.LogTo(Console.WriteLine);
+    //options.LogTo(Console.WriteLine);
 #endif
     options.UseSqlServer(connectionString);
 });
@@ -72,11 +73,16 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapAreaControllerRoute("admin", "admin", "admin/{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "MyArea",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+//app.MapAreaControllerRoute("admin", "admin", "admin/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.MapRazorPages();
 
 app.Run();
