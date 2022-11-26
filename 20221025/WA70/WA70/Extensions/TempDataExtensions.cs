@@ -10,7 +10,7 @@ namespace WA70
             tempData[key] = JsonSerializer.Serialize(data);
         }
 
-        public static T GetFromJson<T>(this ITempDataDictionary tempData, string key)
+        public static T? GetFromJson<T>(this ITempDataDictionary tempData, string key)
         {
             if (tempData.ContainsKey(key))
             {
