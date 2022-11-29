@@ -18,6 +18,12 @@ namespace Northwind.Store.UI.Web.Intranet.Controllers
 
         public IActionResult Index()
         {
+
+            if (HttpContext.Session.GetString("time") == null)
+            {
+                HttpContext.Session.SetString("time", DateTime.Now.ToLongTimeString());
+            }
+
             //throw new ApplicationException("Tenemos un problema");
 
             //return NotFound();

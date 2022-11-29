@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor hca
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -67,6 +69,14 @@
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2022 - Northwind.Store.UI.Web.Intranet - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <span id="time"></span>
+            Session Time: @hca.HttpContext.Session.GetString("time")
+            <script>
+                setInterval(() => {
+                    let currentDate = new Date();
+                    time.innerText = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+                },1000);
+           </script>
         </div>
     </footer>
 

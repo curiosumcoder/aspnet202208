@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -23,14 +24,41 @@ builder.Services.AddDbContextPool<NWContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+builder.Services.AddMemoryCache();
+//builder.Services.AddDistributedMemoryCache();
+// SQL Server, Redis, NCache
+builder.Services.AddSession(options =>
+{
+    // Set a short timeout for easy testing. The default is 20 minutes.
+    options.IdleTimeout = TimeSpan.FromSeconds(5);
+    options.Cookie.HttpOnly = true;
+    // Make the session cookie essential
+    options.Cookie.IsEssential = true;
+});
+
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+    options.Cookie.Name = "YourAppCookieName";
+    options.Cookie.HttpOnly = true;
+    //options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+    options.ExpireTimeSpan = TimeSpan.FromSeconds(10);
+    options.LoginPath = "/Identity/Account/Login";
+    // ReturnUrlParameter requires 
+    //using Microsoft.AspNetCore.Authentication.Cookies;
+    options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+    //options.SlidingExpiration = false;
+});
+
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews();
 //https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.mvcoptions.suppressimplicitrequiredattributefornonnullablereferencetypes?view=aspnetcore-6.0
 //builder.Services.AddControllersWithViews(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
 
-#region Autorizaci�n
+#region Autorización
 // Requerir autenticaci�n para todo el sitio, se except�a
 // el uso espec�fico de Authorize o AllowAnonymous. RECOMENDADO    
 builder.Services.AddAuthorization(options =>
@@ -69,6 +97,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthentication();
 app.UseAuthorization();
