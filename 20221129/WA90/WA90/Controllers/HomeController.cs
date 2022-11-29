@@ -25,7 +25,8 @@ namespace WA90.Controllers
 
         public IActionResult Privacy()
         {
-            return View();
+            return NotFound();
+            //return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

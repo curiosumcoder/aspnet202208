@@ -48,7 +48,7 @@ namespace WA90.Tests
             var liElement = (IHtmlUnorderedListElement)content.QuerySelector("main ul");
 
             // Assert
-            Assert.True(liElement.Children.Length == 15);
+            Assert.True(liElement.Children.Length == 15, "Cantidad de items no esperada");
             // InvalidOperationException
             //Assert.Throws<FormatException>(() => Int32.Parse("123"));
         }
