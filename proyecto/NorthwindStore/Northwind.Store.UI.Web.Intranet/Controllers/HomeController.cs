@@ -30,6 +30,10 @@ namespace Northwind.Store.UI.Web.Intranet.Controllers
             //return Forbid();
             //return Unauthorized();
 
+            _logger.Log(LogLevel.Information, "Esta es una prueba de log");
+            _logger.LogError("Este es un error para el log");
+            _logger.LogWarning("Esta es una alerta para el log");
+
             return View();
         }
 
@@ -42,6 +46,9 @@ namespace Northwind.Store.UI.Web.Intranet.Controllers
         public IActionResult Error()
         {
             //return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+
+            //https://nlog-project.org/
+            //https://serilog.net/
 
             var requestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
             var exceptionMessage = "";

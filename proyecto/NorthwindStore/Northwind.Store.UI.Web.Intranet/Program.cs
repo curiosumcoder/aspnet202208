@@ -59,8 +59,8 @@ builder.Services.AddControllersWithViews();
 //builder.Services.AddControllersWithViews(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
 
 #region Autorización
-// Requerir autenticaci�n para todo el sitio, se except�a
-// el uso espec�fico de Authorize o AllowAnonymous. RECOMENDADO    
+// Requerir autenticación para todo el sitio, se excepto
+// el uso específico de Authorize o AllowAnonymous. RECOMENDADO    
 builder.Services.AddAuthorization(options =>
 {
     options.FallbackPolicy = new AuthorizationPolicyBuilder()
