@@ -22,7 +22,7 @@ namespace WA90.Tests
         [InlineData(3)]
         [InlineData(5)]
         [InlineData(7)]
-        [InlineData(8)]
+        [InlineData(9)]
         public void Number_IsOdd(int num)
         {
             // Arrange

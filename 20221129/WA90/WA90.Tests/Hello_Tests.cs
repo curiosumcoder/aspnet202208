@@ -9,7 +9,7 @@ namespace WA90.Tests
             bool varBool;
 
             // Act
-            varBool = false;
+            varBool = true;
 
             // Assert
             Assert.True(varBool, "No es verdadero");
