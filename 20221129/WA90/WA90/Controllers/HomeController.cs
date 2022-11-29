@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
+using System.Reflection.Metadata.Ecma335;
 using WA90.Data;
 using WA90.Models;
 
@@ -18,8 +19,8 @@ namespace WA90.Controllers
         }
 
         public IActionResult Index()
-        {
-            return View(_num.GetList());
+        {            
+            return View(_num.GetList());            
         }
 
         public IActionResult Privacy()
