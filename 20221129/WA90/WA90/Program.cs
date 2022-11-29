@@ -28,3 +28,8 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+namespace WA90
+{
+    public partial class Program { }
+}
