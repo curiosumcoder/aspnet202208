@@ -30,13 +30,14 @@ builder.Services.AddMemoryCache();
 builder.Services.AddSession(options =>
 {
     // Set a short timeout for easy testing. The default is 20 minutes.
-    options.IdleTimeout = TimeSpan.FromSeconds(5);
+    options.IdleTimeout = TimeSpan.FromSeconds(15);
     options.Cookie.HttpOnly = true;
     // Make the session cookie essential
     options.Cookie.IsEssential = true;
 });
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.ConfigureApplicationCookie(options =>
@@ -63,6 +64,9 @@ builder.Services.AddControllersWithViews();
 // el uso específico de Authorize o AllowAnonymous. RECOMENDADO    
 builder.Services.AddAuthorization(options =>
 {
+    options.AddPolicy("ElevatedRights", policy =>
+        policy.RequireRole("Admin", "Manager"));
+
     options.FallbackPolicy = new AuthorizationPolicyBuilder()
     .RequireAuthenticatedUser()
     .Build();

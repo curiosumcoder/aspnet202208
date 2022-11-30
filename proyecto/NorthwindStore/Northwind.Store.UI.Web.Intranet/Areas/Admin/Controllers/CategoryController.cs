@@ -14,8 +14,9 @@ using Northwind.Store.UI.Web.Intranet.Filters;
 
 namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
 {
-    [ResponseHeader("X-Northwind-Version", "1.0")]
-    //[Authorize]
+    //[ResponseHeader("X-Northwind-Version", "1.0")]
+    //[Authorize(Roles = "Admin,Manager")]
+    [Authorize(Policy = "ElevatedRights")]
     [Area("Admin")]
     public class CategoryController : Controller
     {

@@ -9,14 +9,12 @@ namespace Northwind.Store.UI.Web.Intranet.Controllers
         private readonly ILogger<DemoController> _logger;
         private readonly RoleManager<IdentityRole> _rm;
         private readonly UserManager<IdentityUser> _um;
-        private readonly IAuthorizationService _ase;
 
-        public DemoController(ILogger<DemoController> logger, RoleManager<IdentityRole> rm, UserManager<IdentityUser> um, IAuthorizationService ase)
+        public DemoController(ILogger<DemoController> logger, RoleManager<IdentityRole> rm, UserManager<IdentityUser> um)
         {
             _logger = logger;
             _rm = rm;
             _um = um;
-            _ase = ase;
         }
 
         /// <summary>
